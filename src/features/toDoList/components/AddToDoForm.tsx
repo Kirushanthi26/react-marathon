@@ -1,8 +1,12 @@
 import { useState, type FormEvent } from "react"
 import type { ToDo } from "../types/ToDoType";
 
+type AddToDoFormProps = {
+    onAddNewToDo: (toDo: ToDo) => void
+}
 
-const AddToDoForm = () => {
+
+const AddToDoForm = ({ onAddNewToDo }: AddToDoFormProps) => {
     const [toDoName, setToDoName] = useState<string>("");
     const [description, setDescription] = useState<string>("");
 
@@ -16,7 +20,7 @@ const AddToDoForm = () => {
             isDone: false
         }
 
-        console.log(newToDo)
+        onAddNewToDo(newToDo)
 
         setToDoName("")
         setDescription("")
