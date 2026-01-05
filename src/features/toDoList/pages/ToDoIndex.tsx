@@ -13,12 +13,11 @@ const ToDoIndex = () => {
         })
     }
 
-    console.log(toDos)
 
     return <div className="bg-gray-100 h-screen w-full">
         <div className="grid grid-rows-2 gap-5">
             <AddToDoForm onAddNewToDo={handleAddNewTodos} />
-            <ToDoList />
+            <ToDoList toDos={toDos} />
         </div>
     </div>
 }
