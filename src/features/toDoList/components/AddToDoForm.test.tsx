@@ -18,3 +18,20 @@ test('it shows two inputs and a button', () => {
     expect(button).toBeInTheDocument();
 
 })
+
+/**
+ * * render → puts your React component into a fake browser (render = open the page)
+ * * screen → lets you find elements on the page (screen = look at the page)
+ * * test = define one test -> Text inside quotes = what this test checks, When the test fails, Jest shows this text.
+ * 
+ * *jest.fn() creates a fake function (We don’t care what it does here)
+ * *React renders the component, It appears in the test DOM
+ * 
+ * *Find all elements with role textbox (input type="text" → role textbox) -> inputs is an array [ input1, input2 ]
+ * *Find one button, Button text should contain "add to list", /i means case-insensitive
+ * 
+ * 
+ * *Check that there are exactly 2 inputs
+ * *Check the button is present on the page
+ * *If missing → ❌ test fails
+ */
