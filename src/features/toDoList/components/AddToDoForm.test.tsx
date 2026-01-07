@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import AddToDoForm from "./AddToDoForm";
+import userEvent from '@testing-library/user-event';
 
 
 test('it shows two inputs and a button', () => {
@@ -35,3 +36,37 @@ test('it shows two inputs and a button', () => {
  * *Check the button is present on the page
  * *If missing → ❌ test fails
  */
+
+
+test("adds todo when user submits form", async () => {
+    const mockAddTodo = jest.fn();
+    const user = userEvent.setup();
+
+    //render the component 
+    render(<AddToDoForm onAddNewToDo={mockAddTodo} />)
+
+    //find 2 inputs
+    const taskInput = screen.getByRole('textbox', { name: /task/i })
+    const descInput = screen.getByRole('textbox', { name: /description/i })
+    const button = screen.getByRole('button', { name: /add to list/i })
+
+    //event 
+    await user.type(taskInput, 'Learn RTL')
+    await user.type(descInput, 'Learning Today!')
+    await user.click(button);
+
+    //Assertion - make sure the props fn get called with task and description
+    // check function call
+    expect(mockAddTodo).toHaveBeenCalledTimes(1);
+    expect(mockAddTodo).toHaveBeenCalledWith(
+        expect.objectContaining({
+            toDoName: "Learn RTL",
+            description: "Learning Today!",
+            isDone: false
+        })
+    )
+
+    // check inputs are cleared
+    expect(taskInput).toHaveValue("");
+    expect(descInput).toHaveValue("");
+})
