@@ -13,12 +13,12 @@ export type Post = {
 }
 
 const Post = () => {
-    const [currentPage, setCurrentPage] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
     const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
     const { data: postList, isLoading, isError, error } = useQuery<Post[]>({
         queryKey: ["posts", currentPage],
-        queryFn: () => fetchPosts(currentPage + 1),
+        queryFn: () => fetchPosts(currentPage),
         staleTime: 2000
     });
 
@@ -42,11 +42,12 @@ const Post = () => {
                 ))}
             </ul>
             <div className="my-5 flex justify-between items-center">
-                <button disabled onClick={() => { }} className="bg-amber-300 p-3">
+                <button disabled={currentPage <= 1}
+                    onClick={() => setCurrentPage((prev) => prev - 1)} className="bg-amber-300 p-3 disabled:bg-gray-200">
                     Previous page
                 </button>
-                <span>Page {currentPage + 1}</span>
-                <button disabled onClick={() => { }} className="bg-amber-300 p-3">
+                <span>Page {currentPage}</span>
+                <button disabled={currentPage >= MAX_POST_PAGE} onClick={() => setCurrentPage((prev) => prev + 1)} className="bg-amber-300 p-3">
                     Next page
                 </button>
             </div>
