@@ -13,10 +13,11 @@ export type Comment = {
 
 type PostDetailProps = {
     post: Post
+    deleteMutation: (postId: number) => void
 }
 
 
-const PostDetails = ({ post }: PostDetailProps) => {
+const PostDetails = ({ post, deleteMutation }: PostDetailProps) => {
     const { data, isError, isLoading, error } = useQuery<Comment[]>({
         queryKey: ["comment", post.id],
         queryFn: () => fetchComment(post.id),
@@ -33,7 +34,8 @@ const PostDetails = ({ post }: PostDetailProps) => {
         <div>
             <h3 style={{ color: "blue" }}>{post.title}</h3>
             <div className="flex gap-5">
-                <button className="bg-amber-300 p-3">Delete</button> <button className="bg-amber-300 p-3">Update title</button>
+                <button className="bg-amber-300 p-3"
+                    onClick={() => deleteMutation(post.id)}>Delete</button> <button className="bg-amber-300 p-3">Update title</button>
             </div>
             <p>{post.body}</p>
             <h4 className="font-semibold text-lg mt-2">Comments</h4>

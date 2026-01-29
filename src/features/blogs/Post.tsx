@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PostDetails from "./PostDetails";
-import { fetchPosts } from "../../api/blogApi/blogApi";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { deletePost, fetchPosts } from "../../api/blogApi/blogApi";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const MAX_POST_PAGE = 10;
 
@@ -17,6 +17,14 @@ const Post = () => {
     const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
     const queryClient = useQueryClient()
+
+    const deleteMutation = useMutation({
+        mutationFn: (postId: number) => deletePost(postId)
+    })
+
+    const handleDeletePost = (postId: number) => {
+        deleteMutation.mutate(postId);
+    };
 
     useEffect(() => {
         if (currentPage < MAX_POST_PAGE) {
@@ -66,7 +74,7 @@ const Post = () => {
                 </button>
             </div>
             <hr />
-            {selectedPost && <PostDetails post={selectedPost} />}
+            {selectedPost && <PostDetails post={selectedPost} deleteMutation={handleDeletePost} />}
         </div >
     )
 }

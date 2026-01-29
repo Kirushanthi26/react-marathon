@@ -14,3 +14,14 @@ export const fetchComment = async (postId: number) => {
 
   return response.json();
 };
+
+export const deletePost = async (postId: number) => {
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/posts/${postId}`,
+    {
+      method: "DELETE",
+    },
+  );
+
+  return response.json();
+};
