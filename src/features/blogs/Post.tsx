@@ -16,12 +16,16 @@ const Post = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
-    const { data: postList } = useQuery<Post[]>({
+    const { data: postList, isLoading, isError, error } = useQuery<Post[]>({
         queryKey: ["posts", currentPage],
         queryFn: () => fetchPosts(currentPage + 1),
     });
 
-    if (!postList) return <div></div>
+    if (isLoading) return <h2 className="text-3xl font-semibold"> Loading.....</h2>
+
+    if (isError) return <p>{error.message}</p>
+
+    if (!postList) return
 
     return (
         <div>
