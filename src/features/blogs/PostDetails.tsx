@@ -19,7 +19,9 @@ const PostDetails = ({ post }: PostDetailProps) => {
     return (
         <div>
             <h3 style={{ color: "blue" }}>{post.title}</h3>
-            <button>Delete</button> <button>Update title</button>
+            <div className="flex gap-5">
+                <button className="bg-amber-300 p-3">Delete</button> <button className="bg-amber-300 p-3">Update title</button>
+            </div>
             <p>{post.body}</p>
             <h4>Comments</h4>
             {data.map((comment) => (

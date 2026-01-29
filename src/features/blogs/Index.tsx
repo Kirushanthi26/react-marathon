@@ -6,8 +6,8 @@ const queryClient = new QueryClient()
 const BlogAppIndex = () => {
     return (
         <QueryClientProvider client={queryClient}>
-            <div className="bg-amber-50 h-screen">
-                <h1>Post Blog - Learn React Query</h1>
+            <div className="bg-amber-50 h-screen m-5 p-3">
+                <h1 className="text-2xl font-semibold">Post Blog - Learn React Query</h1>
                 <Post />
             </div>
         </QueryClientProvider>
