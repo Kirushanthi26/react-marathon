@@ -6,3 +6,11 @@ export const fetchPosts = async (pageNum: number = 1) => {
   //throw new Error("something wrong.... getting data...");
   return response.json();
 };
+
+export const fetchComment = async (postId: number) => {
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/comments?postId=${postId}`,
+  );
+
+  return response.json();
+};

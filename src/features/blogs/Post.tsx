@@ -19,9 +19,10 @@ const Post = () => {
     const { data: postList, isLoading, isError, error } = useQuery<Post[]>({
         queryKey: ["posts", currentPage],
         queryFn: () => fetchPosts(currentPage + 1),
+        staleTime: 2000
     });
 
-    if (isLoading) return <h2 className="text-3xl font-semibold"> Loading.....</h2>
+    if (isLoading) return <h2 className="text-3xl font-semibold">Post are Loading.....</h2>
 
     if (isError) return <p>{error.message}</p>
 

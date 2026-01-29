@@ -1,4 +1,6 @@
+import { useQuery } from "@tanstack/react-query"
 import type { Post } from "./Post"
+import { fetchComment } from "../../api/blogApi/blogApi"
 
 
 export type Comment = {
@@ -15,7 +17,18 @@ type PostDetailProps = {
 
 
 const PostDetails = ({ post }: PostDetailProps) => {
-    const data: Comment[] = []
+    const { data, isError, isLoading, error } = useQuery<Comment[]>({
+        queryKey: ["comment", post.id],
+        queryFn: () => fetchComment(post.id),
+        staleTime: 2000
+    })
+
+    if (isLoading) return <h2 className="text-3xl font-semibold">Comments are Loading.....</h2>
+
+    if (isError) return <p>{error.message}</p>
+
+    if (!data) return
+
     return (
         <div>
             <h3 style={{ color: "blue" }}>{post.title}</h3>
@@ -23,7 +36,7 @@ const PostDetails = ({ post }: PostDetailProps) => {
                 <button className="bg-amber-300 p-3">Delete</button> <button className="bg-amber-300 p-3">Update title</button>
             </div>
             <p>{post.body}</p>
-            <h4>Comments</h4>
+            <h4 className="font-semibold text-lg mt-2">Comments</h4>
             {data.map((comment) => (
                 <li key={comment.id}>
                     {comment.email}: {comment.body}
