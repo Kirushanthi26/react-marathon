@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import Post from "./Post"
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 
 const queryClient = new QueryClient()
 
@@ -10,6 +11,7 @@ const BlogAppIndex = () => {
                 <h1 className="text-2xl font-semibold">Post Blog - Learn React Query</h1>
                 <Post />
             </div>
+            <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
     )
 }
