@@ -57,7 +57,10 @@ const Post = () => {
                     <li
                         key={post.id}
                         className="m-2"
-                        onClick={() => setSelectedPost(post)}
+                        onClick={() => {
+                            deleteMutation.reset()
+                            setSelectedPost(post)
+                        }}
                     >
                         {post.title}
                     </li>
@@ -74,7 +77,7 @@ const Post = () => {
                 </button>
             </div>
             <hr />
-            {selectedPost && <PostDetails post={selectedPost} deleteMutation={handleDeletePost} />}
+            {selectedPost && <PostDetails post={selectedPost} deleteMutation={handleDeletePost} deleteMutationResult={deleteMutation} />}
         </div >
     )
 }
