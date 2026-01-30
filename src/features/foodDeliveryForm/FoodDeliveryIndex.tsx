@@ -3,7 +3,7 @@ import FoodDeliveryForm from "./FoodDeliveryForm";
 
 export default function FoodDeliveryIndex() {
     return (
-        <div>
+        <div className="m-5 bg-pink-50 p-8">
             <FoodDeliveryForm />
             {/* <FoodDeliveryFormRHF/> */}
         </div>
