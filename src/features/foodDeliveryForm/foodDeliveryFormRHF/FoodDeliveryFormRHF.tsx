@@ -23,12 +23,9 @@ export default function FoodDeliveryFormRHF() {
 
     }
 
-    const onError = (error: any) => {
-        console.log(error)
-    }
 
     return (
-        <form onSubmit={handleSubmit(handleSubmitForm, onError)} noValidate className="space-y-5 w-full">
+        <form onSubmit={handleSubmit(handleSubmitForm)} noValidate className="space-y-5 w-full">
             <div className="grid grid-cols-2  gap-5">
                 <div>
                     <input type="text" placeholder="Order number" className="border border-gray-500 p-2" {...register('orderNo')} disabled />
