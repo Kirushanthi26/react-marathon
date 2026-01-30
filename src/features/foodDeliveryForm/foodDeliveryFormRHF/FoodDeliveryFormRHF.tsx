@@ -62,6 +62,11 @@ export default function FoodDeliveryFormRHF() {
                         pattern: {
                             value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                             message: "please enter valid email"
+                        },
+                        validate: {
+                            notFake: (value) => {
+                                return value !== "email@gmail.com" || "this email Blocked"
+                            }
                         }
                     })} />
                     {errors.email && <p className="text-red-500">{errors.email.message}</p>}
