@@ -9,6 +9,7 @@ type UserDetails = {
 
 export default function FoodDeliveryFormRHF() {
     const { register, handleSubmit, formState: { errors } } = useForm<UserDetails>({
+        mode: "onChange",
         defaultValues: {
             customerName: "",
             mobileNo: "",
