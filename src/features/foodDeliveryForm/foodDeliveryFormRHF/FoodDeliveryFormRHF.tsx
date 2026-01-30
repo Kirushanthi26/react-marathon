@@ -27,17 +27,25 @@ export default function FoodDeliveryFormRHF() {
     }
 
     return (
-        <form onSubmit={handleSubmit(handleSubmitForm, onError)} className="space-y-5 w-full">
+        <form onSubmit={handleSubmit(handleSubmitForm, onError)} noValidate className="space-y-5 w-full">
             <div className="grid grid-cols-2  gap-5">
                 <div>
-                    <input type="text" placeholder="Order number" className="border border-gray-500 p-2" {...register('orderNo', {
-                        required: "customer name is require"
-                    })} disabled />
-                    {errors.orderNo && <p className="text-red-500">{errors.orderNo.message}</p>}
+                    <input type="text" placeholder="Order number" className="border border-gray-500 p-2" {...register('orderNo')} disabled />
                 </div>
                 <div>
                     <input type="number" placeholder="Mobile Number" className="border border-gray-500 p-2" {...register('mobileNo', {
-                        required: "mobile is require"
+                        required: {
+                            value: true,
+                            message: "mobile is require"
+                        },
+                        minLength: {
+                            value: 10,
+                            message: "mobile number must be 10"
+                        },
+                        maxLength: {
+                            value: 10,
+                            message: "mobile number must be 10"
+                        }
                     })} />
                     {errors.mobileNo && <p className="text-red-500">{errors.mobileNo.message}</p>}
                 </div>
@@ -49,7 +57,11 @@ export default function FoodDeliveryFormRHF() {
                 </div>
                 <div>
                     <input type="email" placeholder="email" className="border border-gray-500 p-2" {...register('email', {
-                        required: "mobile is require"
+                        required: "email is require",
+                        pattern: {
+                            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                            message: "please enter valid email"
+                        }
                     })} />
                     {errors.email && <p className="text-red-500">{errors.email.message}</p>}
                 </div>
