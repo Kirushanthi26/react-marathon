@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form"
 import { TextField } from "../controller/TextField"
+import { SelectField } from "../controller/SelectField"
+import type { SelectOptionType } from "../types"
 
 
 type UserDetails = {
@@ -7,7 +9,24 @@ type UserDetails = {
     mobileNo: string
     orderNo: number
     email: string
+    paymentMethod: string
+    deliveryIn: number
 }
+
+
+const paymentMethods: SelectOptionType[] = [
+    { label: "Select", value: "" },
+    { label: "Bank Transfer", value: "bankTransfer" },
+    { label: "Card", value: "card" },
+    { label: "Cash on delivery", value: "COD" },
+]
+
+const deliveryInTimes: SelectOptionType[] = [
+    { label: "Select", value: 0 },
+    { label: "Half an Hour", value: 30 },
+    { label: "1 hour", value: 60 },
+    { label: "2 hour", value: 120 },
+]
 
 export default function FoodDeliveryFormRHF() {
     const { register, handleSubmit, formState: { errors } } = useForm<UserDetails>({
@@ -16,7 +35,9 @@ export default function FoodDeliveryFormRHF() {
             customerName: "",
             mobileNo: "",
             orderNo: new Date().valueOf(),
-            email: ""
+            email: "",
+            paymentMethod: "",
+            deliveryIn: 0
         }
     })
 
@@ -75,6 +96,32 @@ export default function FoodDeliveryFormRHF() {
                     type="email"
                     label="email"
                     error={errors.email} />
+
+
+                <div>list of delivery food items </div>
+                <div></div>
+                {/* drop down for payment method  */}
+                <SelectField
+                    label="Payment method"
+                    options={paymentMethods}
+                    {...register('paymentMethod', {
+                        required: "please select one payment method"
+                    })}
+                    error={errors.paymentMethod}
+                />
+
+                {/* drop down for delivery time */}
+                <SelectField
+                    label="Delivery Time"
+                    options={deliveryInTimes}
+                    {...register('deliveryIn', {
+                        required: "please select delivery time"
+                    })}
+                    error={errors.deliveryIn}
+                />
+
+
+                <div>delivery address</div>
             </div>
             <button type="submit" className="bg-amber-200 p-2">submit</button>
         </form>
