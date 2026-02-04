@@ -11,6 +11,12 @@ type UserDetails = {
     email: string
     paymentMethod: string
     deliveryIn: number
+    address: {
+        streetAddress: string
+        landMark: string
+        city: string
+        countryState: string
+    }
 }
 
 
@@ -37,7 +43,13 @@ export default function FoodDeliveryFormRHF() {
             orderNo: new Date().valueOf(),
             email: "",
             paymentMethod: "",
-            deliveryIn: 0
+            deliveryIn: 0,
+            address: {
+                streetAddress: "",
+                landMark: "",
+                city: "",
+                countryState: "",
+            }
         }
     })
 
@@ -98,8 +110,7 @@ export default function FoodDeliveryFormRHF() {
                     error={errors.email} />
 
 
-                <div>list of delivery food items </div>
-                <div></div>
+
                 {/* drop down for payment method  */}
                 <SelectField
                     label="Payment method"
@@ -120,8 +131,35 @@ export default function FoodDeliveryFormRHF() {
                     error={errors.deliveryIn}
                 />
 
+                <TextField
+                    {...register('address.streetAddress', {
+                        required: "streetAddress is require"
+                    })}
+                    label="Street Address"
+                    error={errors.address?.streetAddress}
+                />
+                <TextField
+                    {...register('address.landMark', {
+                        required: "land Mark is require"
+                    })}
+                    label="Land Mark"
+                    error={errors.address?.landMark}
+                />
+                <TextField
+                    {...register('address.city', {
+                        required: "city is require"
+                    })}
+                    label="City"
+                    error={errors.address?.city}
+                />
+                <TextField
+                    {...register('address.countryState', {
+                        required: "State is require"
+                    })}
+                    label="State"
+                    error={errors.address?.countryState}
+                />
 
-                <div>delivery address</div>
             </div>
             <button type="submit" className="bg-amber-200 p-2">submit</button>
         </form>
