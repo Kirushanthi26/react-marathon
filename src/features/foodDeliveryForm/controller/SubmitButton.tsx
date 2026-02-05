@@ -1,10 +1,12 @@
+import { useFormState, type Control } from "react-hook-form"
 
 type SubmitButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-    isSubmitting: Boolean
+    control?: Control<any>
 }
 
 const SubmitButton = (props: SubmitButtonProps) => {
-    const { isSubmitting, ...other } = props
+    const { control, ...other } = props
+    const { isSubmitting } = useFormState({ control })
     return (
         <button type="submit" className="bg-amber-200 p-2 flex gap-2 capitalize" {...other}>
             {isSubmitting && <svg className="text-gray-300 animate-spin" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"

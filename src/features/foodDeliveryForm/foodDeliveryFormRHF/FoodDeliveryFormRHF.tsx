@@ -24,7 +24,7 @@ export default function FoodDeliveryFormRHF() {
         }
     })
 
-    const { handleSubmit, formState: { isSubmitting } } = methods
+    const { handleSubmit, control } = methods
 
     const handleSubmitForm = async (data: UserDetails) => {
         await new Promise((resolve) => setTimeout(resolve, 3000))
@@ -35,16 +35,14 @@ export default function FoodDeliveryFormRHF() {
     console.log("main form")
     return (
         <form onSubmit={handleSubmit(handleSubmitForm)} noValidate className="space-y-5 w-full">
-            <div className="grid grid-cols-2 gap-5">
-
-                <FormProvider {...methods}>
+            <FormProvider {...methods}>
+                <div className="grid grid-cols-2 gap-5">
                     <FoodDeliveryMasterFrom />
                     <CheckOutForm />
                     <AddressForm />
-                </FormProvider>
-
-            </div>
-            <SubmitButton isSubmitting={isSubmitting} />
+                </div>
+            </FormProvider>
+            <SubmitButton control={control} />
         </form>
     )
 }
