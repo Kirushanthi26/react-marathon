@@ -1,4 +1,4 @@
-import { useFormContext } from "react-hook-form"
+import { useFormContext, useFormState } from "react-hook-form"
 import { SelectField } from "../../controller/SelectField"
 import type { checkoutForm, SelectOptionType } from "../../types"
 
@@ -17,7 +17,11 @@ const deliveryInTimes: SelectOptionType[] = [
 ]
 
 const CheckOutForm = () => {
-    const { register, formState: { errors } } = useFormContext<checkoutForm>()
+    const { register } = useFormContext<checkoutForm>()
+    const { errors } = useFormState<checkoutForm>({
+        name: ["paymentMethod", "deliveryIn"]
+    })
+    console.log("checkout form")
     return (
         <>
             {/* drop down for payment method  */}

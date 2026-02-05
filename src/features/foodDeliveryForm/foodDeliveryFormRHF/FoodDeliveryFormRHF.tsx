@@ -32,7 +32,7 @@ export default function FoodDeliveryFormRHF() {
 
     }
 
-
+    console.log("main form")
     return (
         <form onSubmit={handleSubmit(handleSubmitForm)} noValidate className="space-y-5 w-full">
             <div className="grid grid-cols-2 gap-5">

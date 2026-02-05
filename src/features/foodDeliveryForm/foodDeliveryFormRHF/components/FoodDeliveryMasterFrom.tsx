@@ -1,10 +1,14 @@
-import { useFormContext } from "react-hook-form"
+import { useFormContext, useFormState } from "react-hook-form"
 import { TextField } from "../../controller/TextField"
 import type { FoodDeliveryMasterFromType } from "../../types"
 
 
 const FoodDeliveryMasterFrom = () => {
-    const { register, formState: { errors } } = useFormContext<FoodDeliveryMasterFromType>()
+    const { register } = useFormContext<FoodDeliveryMasterFromType>()
+    const { errors } = useFormState<FoodDeliveryMasterFromType>({
+        name: ["customerName", "email", "mobileNo", "orderNo"]
+    })
+    console.log("contact form")
     return (
         <>
             <TextField label="Order number" {...register('orderNo')} disabled />
