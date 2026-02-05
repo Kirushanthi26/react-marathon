@@ -3,6 +3,7 @@ import CheckOutForm from "./components/CheckOutForm"
 import type { UserDetails } from "../types"
 import AddressForm from "./components/AddressForm"
 import FoodDeliveryMasterFrom from "./components/FoodDeliveryMasterFrom"
+import SubmitButton from "../controller/SubmitButton"
 
 export default function FoodDeliveryFormRHF() {
     const methods: UseFormReturn<UserDetails> = useForm<UserDetails>({
@@ -23,9 +24,10 @@ export default function FoodDeliveryFormRHF() {
         }
     })
 
-    const { handleSubmit } = methods
+    const { handleSubmit, formState: { isSubmitting } } = methods
 
-    const handleSubmitForm = (data: UserDetails) => {
+    const handleSubmitForm = async (data: UserDetails) => {
+        await new Promise((resolve) => setTimeout(resolve, 3000))
         console.log(data)
 
     }
@@ -42,7 +44,7 @@ export default function FoodDeliveryFormRHF() {
                 </FormProvider>
 
             </div>
-            <button type="submit" className="bg-amber-200 p-2">submit</button>
+            <SubmitButton isSubmitting={isSubmitting} />
         </form>
     )
 }
