@@ -1,41 +1,10 @@
-import { useForm } from "react-hook-form"
+import { FormProvider, useForm, type UseFormReturn } from "react-hook-form"
 import { TextField } from "../controller/TextField"
-import { SelectField } from "../controller/SelectField"
-import type { SelectOptionType } from "../types"
-
-
-type UserDetails = {
-    customerName: string
-    mobileNo: string
-    orderNo: number
-    email: string
-    paymentMethod: string
-    deliveryIn: number
-    address: {
-        streetAddress: string
-        landMark: string
-        city: string
-        countryState: string
-    }
-}
-
-
-const paymentMethods: SelectOptionType[] = [
-    { label: "Select", value: "" },
-    { label: "Bank Transfer", value: "bankTransfer" },
-    { label: "Card", value: "card" },
-    { label: "Cash on delivery", value: "COD" },
-]
-
-const deliveryInTimes: SelectOptionType[] = [
-    { label: "Select", value: 0 },
-    { label: "Half an Hour", value: 30 },
-    { label: "1 hour", value: 60 },
-    { label: "2 hour", value: 120 },
-]
+import CheckOutForm from "./CheckOutForm"
+import type { UserDetails } from "../types"
 
 export default function FoodDeliveryFormRHF() {
-    const { register, handleSubmit, formState: { errors } } = useForm<UserDetails>({
+    const methods: UseFormReturn<UserDetails> = useForm<UserDetails>({
         mode: "onSubmit",
         defaultValues: {
             customerName: "",
@@ -52,6 +21,8 @@ export default function FoodDeliveryFormRHF() {
             }
         }
     })
+
+    const { register, handleSubmit, formState: { errors } } = methods
 
     const handleSubmitForm = (data: UserDetails) => {
         console.log(data)
@@ -110,26 +81,9 @@ export default function FoodDeliveryFormRHF() {
                     error={errors.email} />
 
 
-
-                {/* drop down for payment method  */}
-                <SelectField
-                    label="Payment method"
-                    options={paymentMethods}
-                    {...register('paymentMethod', {
-                        required: "please select one payment method"
-                    })}
-                    error={errors.paymentMethod}
-                />
-
-                {/* drop down for delivery time */}
-                <SelectField
-                    label="Delivery Time"
-                    options={deliveryInTimes}
-                    {...register('deliveryIn', {
-                        required: "please select delivery time"
-                    })}
-                    error={errors.deliveryIn}
-                />
+                <FormProvider {...methods}>
+                    <CheckOutForm />
+                </FormProvider>
 
                 <TextField
                     {...register('address.streetAddress', {
