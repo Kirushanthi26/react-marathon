@@ -6,7 +6,8 @@ import type { FoodDeliveryMasterFromType } from "../../types"
 const FoodDeliveryMasterFrom = () => {
     const { register } = useFormContext<FoodDeliveryMasterFromType>()
     const { errors } = useFormState<FoodDeliveryMasterFromType>({
-        name: ["customerName", "email", "mobileNo", "orderNo"]
+        name: ["customerName", "email", "mobileNo", "orderNo"],
+        exact: true
     })
     console.log("contact form")
     return (

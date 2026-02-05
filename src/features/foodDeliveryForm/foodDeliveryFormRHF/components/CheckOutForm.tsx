@@ -19,7 +19,8 @@ const deliveryInTimes: SelectOptionType[] = [
 const CheckOutForm = () => {
     const { register } = useFormContext<checkoutForm>()
     const { errors } = useFormState<checkoutForm>({
-        name: ["paymentMethod", "deliveryIn"]
+        name: ["paymentMethod", "deliveryIn"],
+        exact: true
     })
     console.log("checkout form")
     return (

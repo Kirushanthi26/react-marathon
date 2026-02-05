@@ -6,7 +6,9 @@ const AddressForm = () => {
     const { register } = useFormContext<{ address: AddressType }>()
 
     const { errors } = useFormState<{ address: AddressType }>({
-        name: "address"
+        //name: "address",
+        name: ["address.streetAddress", "address.city", "address.landMark", "address.countryState"],
+        exact: true
     })
 
     console.log("address form")
