@@ -3,19 +3,25 @@ export type checkoutForm = {
     deliveryIn: number
 }
 
+export type AddressType = {
+    streetAddress: string
+    landMark: string
+    city: string
+    countryState: string
+}
 
-export type UserDetails = {
+export type FoodDeliveryMasterFromType = {
     customerName: string
     mobileNo: string
     orderNo: number
     email: string
-    address: {
-        streetAddress: string
-        landMark: string
-        city: string
-        countryState: string
-    }
-} & checkoutForm
+}
+
+
+export type UserDetails = {
+
+    address: AddressType
+} & checkoutForm & FoodDeliveryMasterFromType
 
 
 export type SelectOptionType = {
