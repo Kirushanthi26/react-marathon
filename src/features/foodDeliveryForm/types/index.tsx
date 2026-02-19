@@ -17,9 +17,13 @@ export type FoodDeliveryMasterFromType = {
     email: string
 }
 
+export type FoodItemType = {
+    name: string
+    quantity: number
+}
 
 export type UserDetails = {
-
+    foodItems: FoodItemType[]
     address: AddressType
 } & checkoutForm & FoodDeliveryMasterFromType
 

@@ -4,6 +4,7 @@ import type { UserDetails } from "../types"
 import AddressForm from "./components/AddressForm"
 import FoodDeliveryMasterFrom from "./components/FoodDeliveryMasterFrom"
 import SubmitButton from "../controller/SubmitButton"
+import FoodItems from "./components/FoodItems"
 
 export default function FoodDeliveryFormRHF() {
     const methods: UseFormReturn<UserDetails> = useForm<UserDetails>({
@@ -15,6 +16,10 @@ export default function FoodDeliveryFormRHF() {
             email: "",
             paymentMethod: "",
             deliveryIn: 0,
+            foodItems: [
+                { name: "", quantity: 0 },
+                { name: "", quantity: 0 },
+            ],
             address: {
                 streetAddress: "",
                 landMark: "",
@@ -38,6 +43,7 @@ export default function FoodDeliveryFormRHF() {
             <FormProvider {...methods}>
                 <div className="grid grid-cols-2 gap-5">
                     <FoodDeliveryMasterFrom />
+                    <FoodItems />
                     <CheckOutForm />
                     <AddressForm />
                 </div>

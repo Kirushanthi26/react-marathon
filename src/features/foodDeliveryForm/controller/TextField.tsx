@@ -2,7 +2,7 @@ import { forwardRef, type ForwardedRef } from "react"
 import type { FieldError } from "react-hook-form"
 
 type TextFieldProps = React.InputHTMLAttributes<HTMLInputElement> & {
-    label: string
+    label?: string
     error?: FieldError
 }
 
@@ -10,7 +10,7 @@ export const TextField = forwardRef((props: TextFieldProps, ref: ForwardedRef<HT
     const { type = "text", label, className = "", error, ...other } = props
     return (
         <div>
-            <label>{label}</label>
+            {label && <label>{label}</label>}
             <br />
             <input
                 type={type}
