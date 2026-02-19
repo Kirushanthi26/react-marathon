@@ -16,7 +16,15 @@ const FoodItems = () => {
         remove,
         update
 
-    } = useFieldArray<UserDetails>({ name: "foodItems" })
+    } = useFieldArray<UserDetails>({
+        name: "foodItems",
+        rules: {
+            required: {
+                value: true,
+                message: "at least 1 item needs to add"
+            }
+        }
+    })
 
     const handleAddRow = () => {
         append({ name: "food append test", quantity: 8 }, {
@@ -69,6 +77,14 @@ const FoodItems = () => {
                     </td>
                 </tr>
             )}
+            {errors.foodItems?.root && <tfoot>
+                <tr>
+                    <td colSpan={3} className="text-red-600 font-semibold">
+                        {errors.foodItems?.root?.message}
+                    </td>
+                </tr>
+            </tfoot>}
+
 
             <button type="button"
                 className="bg-yellow-200"
@@ -76,6 +92,7 @@ const FoodItems = () => {
             >
                 update
             </button>
+
         </table>
     )
 }
